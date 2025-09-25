@@ -18,12 +18,19 @@ jobs:
           port: 22
           script: |
             set -euo pipefail
-            echo "Starting deploy as LexHouse on $(hostname) ..."
+            echo "Starting deploy as ubuntu on $(hostname) ..."
 
             # App path
             cd /var/www/html/GitHub-actions-CICD-EC2/ || { echo "path not found"; exit 1; }
 
+            # Load nvm (from root, since that's where node is installed)
+            export NVM_DIR="/ubuntu/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm use node
 
+            # Use root's PM2 process list
+            export PM2_HOME="/ubuntu/.pm2"
             git pull origin main
             npm install
             npm run build
