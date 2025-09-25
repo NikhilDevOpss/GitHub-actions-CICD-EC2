@@ -24,7 +24,7 @@ jobs:
             cd /var/www/html/GitHub-actions-CICD-EC2/ || { echo "path not found"; exit 1; }
 
             # Load nvm (from root, since that's where node is installed)
-            export NVM_DIR="home/ubuntu/.nvm"
+            export NVM_DIR="/home/ubuntu/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             nvm use node
